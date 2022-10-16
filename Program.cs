@@ -8,16 +8,16 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-         void FullArray(string[] array)// метод наполняет массив случайными числами
+         void FullArray(string[] array)// метод наполняет массив данными введенными пользователем
         {
             for (int i = 0; i < array.Length; i++)
             {
                 Console.Write($"Введите {i+1} элемент массива -");
-                string? nnn = Convert.ToString(Console.ReadLine());
-                array[i] = nnn;
+                string? value = Convert.ToString(Console.ReadLine());
+                array[i] = value;
             }
         }
-        void PrintArray(string[] Col) // метод выводяций массив на печать
+        void PrintArray(string[] Col) // метод выводяций введенный массив на печать
         {
             Console.Write($"Вами был введен массив строк из {Col.Length} элементов - ");
             for (int i = 0; i < Col.Length; i++)
@@ -28,16 +28,16 @@ internal class Program
             Console.WriteLine();
         }
 
-        void SortArray(string[] array)// метод вычисляющий разницу между макс и мин элем массива
+        void SortArray(string[] array)// метод вычисляющий элементы массива с кол-вом символом <=3 и выводит их на печать
         { 
             string [] sortarray = new string [array.Length];
            int count =0;
             for (int i=0; i<array.Length; i++)
             {
-                if (array[i].Length<=3) 
+                if (array[i].Length>=1 && array[i].Length<=3) 
                 {
-                sortarray[i]=array[i];
-                count = count+1;
+                    sortarray[count]=array[i];
+                    count++;
                 }
             }
             if (count!=0)
@@ -46,8 +46,13 @@ internal class Program
                 Console.Write($"В веденном массиве {count} элемента удовлетворяют заданным требованиям:- ");
                 for (int j=0; j<sortarray.Length; j++)
                 {
-                Console.Write($" {sortarray[j]}");
+                    if (sortarray[j].Length!=0)
+                    {
+                        if (j<count-1)  Console.Write($" {sortarray[j]}, ");
+                         else Console.WriteLine($" {sortarray[j]}.");
+                    }
                 }
+                 Console.WriteLine();
             }
              else 
             {
@@ -58,7 +63,7 @@ internal class Program
         try
         {
             Console.Clear();
-            Console.WriteLine("Данная программа из имеющегося массива строк формирует массив из строк, длина которых меньше либо равна 3 символа");
+            Console.WriteLine("Данная программа из введенного массива строк формирует массив из строк, длина которых меньше либо равна 3 символа");
             Console.Write("Введите количество элементов в массиве и нажмите Enter.- ");
             int n = Convert.ToInt32(Console.ReadLine());
             string [] array = new string[n];
@@ -66,6 +71,7 @@ internal class Program
             Console.WriteLine();
             PrintArray(array);
             SortArray(array);
+            Console.WriteLine();
             Console.WriteLine("Для выхода из программы нажмите любую клавишу.");
             Console.ReadKey();
         }
